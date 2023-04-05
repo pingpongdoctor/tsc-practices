@@ -1,0 +1,49 @@
+//TYPE ASSERTION
+//ASSERTION FOR TYPE IS USED MOSTLY WHEN THE VALUE RETURNED IS NOT KNOWN BY TYPESCRIPT (EX: GETELEMENTBYID)
+type One = string;
+type Two = string | number;
+type Three = "simon";
+
+//USE TYPE ASSERTION
+let name1 = "simon" as One;
+let name2 = name1 as Two;
+let name3 = name2 as Three;
+
+//ANOTHER WAY TO USE TYPE ASSERTION (CAN NOT USE THIS IN TSX IN REACT APPS)
+let d = <One>"simon";
+let e = <Two>d;
+let f = <Three>e;
+
+//USE TYPE ASSERTION FOR THE RETURNED VALUE OF A FUNCTION WHICH HAS A UNION TYPE
+const concatFunc = (
+  a: number,
+  b: number,
+  c: "concat" | "add"
+): string | number => {
+  if (c === "add") {
+    return a + b;
+  }
+  return "" + a + b;
+}; //THIS FUNCTION RETURN STRING OR NUMBER VALUE
+
+//THE RETURN VALUE IS A STRING BUT THE FUNCTION RETURN STRING OR VALUE
+//USE THE TYPE ASSERTION TO ASSERT THAT THE RETURN VALUE IS A STRING IN THIS SITUATION
+const returnValue: string = concatFunc(1, 2, "concat") as string;
+//USE THE TYPE ASSERTION TO ASSERT THAT THE RETURN VALUE IS A NUMBER IN THIS SITUATION
+const returnValue2: number = concatFunc(1, 2, "add") as number;
+//BE CAREFUL WHEN USING TYPE ASSERTION SINCE TYPESCRIPT IS FORCED TO BELIEVE YOU
+//THE FUNCTION BELOW RETURN A STRING BUT THE DATA TYPE ANNOTATED FOR THE VARIABLE IS STRING, AND TYPSCRIPT DOES NOT WARN ABOUT THAT
+const returnValue3: number = concatFunc(1, 2, "concat") as number;
+
+//DOUBLE ASSERTIONS ARE USED TO OVERRULE THE TYPESCRIPT
+//THIS IS NOT USED MUCH AND WE SHOULD AVOID THIS
+10 as unknown as string;
+
+//USE TYPE ASSERTION WHEN IT COMES TO USING DOM
+//BECAUSE THE IMAGE ELEMENT CAN BE NULL, WE NEED TO USE TYPE ASSERTION SPECIFY TO LET TS KNOW THAT IMAGE IS AN ELEMENT SO THAT IT CAN BE ACCESSED
+const image = document.querySelector("#imgEle") as HTMLImageElement;
+const image2 = <HTMLImageElement>document.getElementById("imgEle");
+image.src;
+image2.src;
+//USE ! TO EXPRESS THAT THE IT IS A NOT-NULL ASSERTION
+const image3 = document.getElementById("imgEle")!; //IN THIS CASE, THE TS KNOWS THAT THIS IS AN ELEMENT BUT IT DOES NOT KNOW THAT THIS IS AN IMAGE
