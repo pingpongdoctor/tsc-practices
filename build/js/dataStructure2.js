@@ -19,11 +19,14 @@ let sumAll = function (a, b, c) {
     //IF C IS UNDEFINED, WE NEED TO RETURN A NUMBER SINCE THE RETURNED VALUE TYPE ASSIGNED IS A NUMBER
     return a + b;
 };
-//IF WE USE THE DEFAULT VALUE FOR PARAMETERS, WE DO NOT NEED TO DO THINGS ABOVE
-//IF WE USE DEFAULT VALUES FOR A FUNCTION, WE CAN NOT ADD A TYPE ALIAS TO THE FUNCTION
+//IF YOU WANT TO USE DEFAULT VALUE, YOU HAVE TO USE IT DIRECTLY
 let sumAll2 = function (a = 10, b, c = 2) {
     return a + b + c;
 };
+let sumAll23 = function (a = 10, b = 3, c = 8) {
+    return a + b + c;
+};
+console.log(sumAll23(7, undefined, undefined));
 //USE UNDEFINE TO APPLY THE DEFAULT VALUES
 console.log(sumAll2(undefined, 2, undefined));
 //USE REST PARAMETER TO INPUT AN ARRAY AS A AN ARGUMENT VALUE INTO A FUNCTION WITHOUT USING THE SQUARE BRACKET

@@ -45,11 +45,16 @@ let sumAll: SumAllFunc = function (a, b, c) {
   return a + b;
 };
 
-//IF WE USE THE DEFAULT VALUE FOR PARAMETERS, WE DO NOT NEED TO DO THINGS ABOVE
-//IF WE USE DEFAULT VALUES FOR A FUNCTION, WE CAN NOT ADD A TYPE ALIAS TO THE FUNCTION
+//IF YOU WANT TO USE DEFAULT VALUE, YOU HAVE TO USE IT DIRECTLY
 let sumAll2 = function (a: number = 10, b: number, c: number = 2) {
   return a + b + c;
 };
+//OR YOU CAN USE IT WITH OPTIONAL PARAMETER
+type SumAllFunc2 = (a?: number, b?: number, c?: number) => number;
+let sumAll23: SumAllFunc2 = function (a = 10, b = 3, c = 8) {
+  return a + b + c;
+};
+console.log(sumAll23(7, undefined, undefined));
 //USE UNDEFINE TO APPLY THE DEFAULT VALUES
 console.log(sumAll2(undefined, 2, undefined));
 
